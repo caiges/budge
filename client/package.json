@@ -1,0 +1,18 @@
+{
+  "name": "budge",
+  "version": "0.0.0",
+  "description": "Budge your budgeting",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gogs@git.replrapl.com:caiges/budge.git"
+  },
+  "author": "Caige Nichols <caigesn@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "*"
+  }
+}
