@@ -1,4 +1,4 @@
-var clean = require('del'),
+const del = require('del'),
   concat = require('gulp-concat'),
   gulp = require('gulp'),
   gutil = require('gulp-util'),
@@ -7,6 +7,8 @@ var clean = require('del'),
   fs = require('fs'),
   templateCache = require('gulp-angular-templatecache'),
   connect = require('connect'),
+  morgan = require('morgan'),
+  serveStatic = require('serve-static'),
   http = require('http'),
   argv = require('yargs').argv;
 
@@ -17,25 +19,22 @@ var cssDestination = 'assets/css',
 // Serve up app.
 gulp.task('serve', function() {
   var app = connect()
-    .use(connect.logger('dev'))
-    .use(connect.static('.'));
+    .use(morgan('dev'))
+    .use(serveStatic('.'));
 
   http.createServer(app).listen(4000);
 });
 
 // Wipe out the JavaScript, Stylesheet and Web Font destinations.
-gulp.task('clean', function() {
-  return gulp.src([jsDestination + '/**/*', cssDestination + '/**/*', fontDestination + '/**/*'], {
-      read: false
-    })
-    .pipe(del())
+gulp.task('clean', function(cb) {
+  return del([jsDestination + '/**/*', cssDestination + '/**/*', fontDestination + '/**/*'], cb);
 });
 
 // Watch and rebuild JavaScript and Stylesheets.
 gulp.task('default', ['clean', 'config', 'templates', 'js', 'css', 'fonts', 'serve'], function() {
   console.log('Watching development files...');
+  gulp.watch(['src/js/**/*'], ['js']);
   gulp.watch(['templates/**/*.html'], ['templates']);
-  gulp.watch(['../repo-user-app-core/dist/js/**/*', 'src_assets/js/**/*'], ['js']);
   gulp.watch(['src_assets/css/**/*'], ['css']);
 });
 
@@ -52,13 +51,6 @@ gulp.task('templates', function() {
 // Build JavaScript files.
 gulp.task('js', ['config', 'templates'], function() {
   return gulp.src([
-      '../repo-user-app-core/dist/js/all.js',
-      'bower_components/uikit/js/uikit.js',
-      'bower_components/uikit/js/components/datepicker.js',
-      'bower_components/firebase/firebase.js',
-      'bower_components/angularfire/dist/angularfire.js',
-      'bower_components/angulartics/dist/angulartics.min.js',
-      'bower_components/angulartics/dist/angulartics-woopra.min.js',
       'bower_components/angular-messages/angular-messages.js',
       'src_assets/js/templates.js',
       'src_assets/js/config.js',
@@ -72,9 +64,6 @@ gulp.task('js', ['config', 'templates'], function() {
 // Build Stylesheets.
 gulp.task('css', function() {
   return gulp.src([
-      'bower_components/uikit/css/uikit.almost-flat.css',
-      'bower_components/uikit/css/components/**/*.css',
-      'bower_components/angular-toggle-switch/angular-toggle-switch.css',
       'src_assets/css/app.scss'
     ])
     .pipe(sass({
@@ -90,15 +79,15 @@ gulp.task('css', function() {
 
 // Build fonts.
 gulp.task('fonts', function() {
-  return gulp.src('bower_components/uikit/fonts/**/*')
-    .pipe(gulp.dest(fontDestination));
+//  return gulp.src('bower_components/uikit/fonts/**/*')
+//   .pipe(gulp.dest(fontDestination));
 });
 
 // Build config.
 gulp.task('config', function() {
   var configPath = argv.config || 'default';
 
-  fs.writeFileSync('src_assets/js/config.js', fs.readFileSync('config/' + configPath + '.js'));
+  fs.writeFileSync('src/js/config.js', fs.readFileSync('config/' + configPath + '.js'));
 });
 
 // Build assets.
