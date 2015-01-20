@@ -1,4 +1,4 @@
-var app = angular.module('budgeApp', ['ui.router']);
+var app = angular.module('budgeApp', ['ui.router', 'budgeOverviewController']);
 
 app.config(['$stateProvider', function($stateProvider) {
 
@@ -12,7 +12,7 @@ app.config(['$stateProvider', function($stateProvider) {
       url: '/signin',
       authenticate: false,
       controller: 'budgeAuthenticationCtrl',
-      templateUrl: '/templates/sessions/signin.html'
+      templateUrl: '/templates/sessions/new.html'
     })
     .state('signout', {
       url: '/signout',
