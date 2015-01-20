@@ -2,3 +2,6 @@ npm-debug.log
 *.swp
 *.swo
 node_modules/
+bower_components/
+src/js/templates.js
+assets/

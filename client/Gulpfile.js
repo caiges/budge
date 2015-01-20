@@ -12,7 +12,7 @@ const del = require('del'),
   http = require('http'),
   argv = require('yargs').argv;
 
-var cssDestination = 'assets/css',
+const cssDestination = 'assets/css',
   jsDestination = 'assets/js',
   fontDestination = 'assets/fonts';
 
@@ -35,7 +35,7 @@ gulp.task('default', ['clean', 'config', 'templates', 'js', 'css', 'fonts', 'ser
   console.log('Watching development files...');
   gulp.watch(['src/js/**/*'], ['js']);
   gulp.watch(['templates/**/*.html'], ['templates']);
-  gulp.watch(['src_assets/css/**/*'], ['css']);
+  gulp.watch(['src/css/**/*'], ['css']);
 });
 
 // Compile templates.
@@ -45,17 +45,18 @@ gulp.task('templates', function() {
       root: '/templates/',
       standalone: true
     }))
-    .pipe(gulp.dest('src_assets/js'));
+    .pipe(gulp.dest('src/js'));
 });
 
 // Build JavaScript files.
 gulp.task('js', ['config', 'templates'], function() {
   return gulp.src([
-      'bower_components/angular-messages/angular-messages.js',
-      'src_assets/js/templates.js',
-      'src_assets/js/config.js',
-      'src_assets/js/controllers/**/*.js',
-      'src_assets/js/app.js'
+      'bower_components/angularjs/angular.js',
+      'bower_components/ui-router/release/angular-ui-router.js',
+      'src/js/templates.js',
+      'src/js/config.js',
+      'src/js/controllers/**/*.js',
+      'src/js/app.js'
     ])
     .pipe(concat('all.min.js'))
     .pipe(gulp.dest(jsDestination));
@@ -64,7 +65,7 @@ gulp.task('js', ['config', 'templates'], function() {
 // Build Stylesheets.
 gulp.task('css', function() {
   return gulp.src([
-      'src_assets/css/app.scss'
+      'src/css/app.scss'
     ])
     .pipe(sass({
       errLogToConsole: false,

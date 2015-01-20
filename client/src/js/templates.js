@@ -1,0 +1,1 @@
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("/templates/sessions/new.html","<input name=\"username\" placeholder=\"Blars Tacoman\">\n<input type=\"password\" name=\"password\">\n<button>Sign In</button>\n");}]);
