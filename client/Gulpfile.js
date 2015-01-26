@@ -80,8 +80,8 @@ gulp.task('css', function() {
 
 // Build fonts.
 gulp.task('fonts', function() {
-//  return gulp.src('bower_components/uikit/fonts/**/*')
-//   .pipe(gulp.dest(fontDestination));
+  //  return gulp.src('bower_components/uikit/fonts/**/*')
+  //   .pipe(gulp.dest(fontDestination));
 });
 
 // Build config.
