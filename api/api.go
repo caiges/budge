@@ -2,26 +2,32 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/mgo.v2/bson"
+	//"gopkg.in/mgo.v2/bson"
 	"log"
 	"net/http"
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
+func PeopleHandler(w http.ResponseWriter, r *http.Request) {
 	s := session.Copy()
 	defer s.Close()
 	c := s.DB("test").C("people")
-	err := c.Insert(&Person{"Ale", "+55 53 8116 9639"},
-		&Person{"Cla", "+55 53 8402 8510"})
+	var results []Person
+	err := c.Find(nil).All(&results)
 	if err != nil {
 		log.Fatal(err)
 	}
+	for _, person := range results {
+		fmt.Println("Email:", person.Email)
+	}
+}
 
-	result := Person{}
-	err = c.Find(bson.M{"name": "Ale"}).One(&result)
+func NewPersonHandler(w http.ResponseWriter, r *http.Request) {
+	s := session.Copy()
+	defer s.Close()
+	c := s.DB("test").C("people")
+	err := c.Insert(&Person{"Caige", "caigesn@gmail.com"},
+		&Person{"Sara", "saralynnenichols@gmail.com"})
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println("Phone:", result.Phone)
 }

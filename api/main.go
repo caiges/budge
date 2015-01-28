@@ -19,7 +19,9 @@ func main() {
 	session.SetMode(mgo.Monotonic, true)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", IndexHandler)
+	people := r.PathPrefix("/people").Subrouter()
+	people.HandleFunc("/", PeopleHandler)
+	people.HandleFunc("/create", NewPersonHandler)
 
 	http.Handle("/", r)
 	log.Println("Listening...")
