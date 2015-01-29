@@ -22,6 +22,7 @@ func main() {
 	people := r.PathPrefix("/people").Subrouter()
 	people.HandleFunc("/", PeopleHandler)
 	people.HandleFunc("/create", NewPersonHandler)
+	people.HandleFunc("/show", ShowPersonHandler)
 
 	http.Handle("/", r)
 	log.Println("Listening...")
