@@ -9,10 +9,7 @@ billServices.service('billService', ['budgeAPI', function(budgeAPI) {
   // Fetch bills
   this.fetch = function(force) {
     if(this.bills.collection.length === 0 || force) {
-      //this.bills.collection = 
-      this.api.getList().then(function(resp) {
-        console.log(resp);
-      });
+      this.bills.collection = this.api.getList().$object;
     }
   };
 

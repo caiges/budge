@@ -6,8 +6,8 @@ import (
 
 type Bill struct {
 	Id       bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	Name     string
-	Amount   float64
+	Name     string        `json:"name"`
+	Amount   float64       `json:"amount"`
 	Revision uint16
 }
 
