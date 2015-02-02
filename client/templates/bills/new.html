@@ -1,0 +1,13 @@
+<h1>New Bill</h1>
+
+<form name="newBillForm" class="uk-form" novalidate>
+  <div class="uk-form-row">
+    <input type="text" name="name" ng-model="newBill.name" placeholder="Car Insurance" required>
+  </div>
+  <div class="uk-form-row">
+    <input type="number" name="amount" ng-model="newBill.amount" placeholder="120.00" required>
+  </div>
+  <div class="uk-form-row">
+    <button class="uk-button uk-button-primary" ng-click="save(newBillForm)" ng-disabled="newBillForm.$invalid">Save</button>
+  </div>
+</form>

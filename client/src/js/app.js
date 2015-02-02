@@ -14,6 +14,12 @@ app.config(['$stateProvider', function($stateProvider) {
       controller: 'billsCtrl',
       templateUrl: '/templates/bills/index.html'
     })
+    .state('new-bill', {
+      url: '/bills/new',
+      authenticate: true,
+      controller: 'newBillCtrl',
+      templateUrl: '/templates/bills/new.html'
+    })
     .state('signin', {
       url: '/signin',
       authenticate: false,
