@@ -1,6 +1,7 @@
-var billServices = angular.module('BudgeBillServices', []);
+var billServices = angular.module('BudgeBillServices', ['BudgeAPI']);
 
-billServices.service('billService', function() {
+billServices.service('billService', ['budgeAPI', function(budgeAPI) {
+  this.api = budgeAPI.service('bills');
   this.bills = {
     collection: []
   };
@@ -8,7 +9,10 @@ billServices.service('billService', function() {
   // Fetch bills
   this.fetch = function(force) {
     if(this.bills.collection.length === 0 || force) {
-      console.log('fetching bills');
+      //this.bills.collection = 
+      this.api.getList().then(function(resp) {
+        console.log(resp);
+      });
     }
   };
 
@@ -27,4 +31,4 @@ billServices.service('billService', function() {
   this.get = function(id) {
     return _.findWhere(this.bills.collection, { name: id });
   };
-});
+}]);
