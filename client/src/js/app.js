@@ -9,7 +9,7 @@ app.config(['$stateProvider', function($stateProvider) {
       controller: 'budgeOverviewCtrl'
     })
     .state('bills', {
-      url: 'bills',
+      url: '/bills',
       authenticate: true,
       controller: 'billsCtrl',
       templateUrl: '/templates/bills/index.html'
