@@ -51,8 +51,10 @@ gulp.task('templates', function() {
 // Build JavaScript files.
 gulp.task('js', ['config', 'templates'], function() {
   return gulp.src([
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angularjs/angular.js',
       'bower_components/ui-router/release/angular-ui-router.js',
+      'bower_components/uikit/js/uikit.js',
       'src/js/templates.js',
       'src/js/config.js',
       'src/js/controllers/**/*.js',
@@ -65,6 +67,7 @@ gulp.task('js', ['config', 'templates'], function() {
 // Build Stylesheets.
 gulp.task('css', function() {
   return gulp.src([
+      'bower_components/uikit/css/uikit.css',
       'src/css/app.scss'
     ])
     .pipe(sass({
@@ -80,8 +83,8 @@ gulp.task('css', function() {
 
 // Build fonts.
 gulp.task('fonts', function() {
-  //  return gulp.src('bower_components/uikit/fonts/**/*')
-  //   .pipe(gulp.dest(fontDestination));
+  return gulp.src('bower_components/uikit/fonts/**/*')
+   .pipe(gulp.dest(fontDestination));
 });
 
 // Build config.
