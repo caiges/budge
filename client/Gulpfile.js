@@ -52,6 +52,7 @@ gulp.task('templates', function() {
 gulp.task('js', ['config', 'templates'], function() {
   return gulp.src([
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/underscore/underscore.js',
       'bower_components/angularjs/angular.js',
       'bower_components/ui-router/release/angular-ui-router.js',
       'bower_components/uikit/js/uikit.js',

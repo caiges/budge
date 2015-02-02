@@ -1,2 +1,6 @@
 <h1>Bills</h1>
 <a ui-sref="new-bill" class="uk-button">New Bill</a>
+
+<ul>
+  <li ng-repeat="bill in bills.collection">{{ bill.name }} - {{ bill.amount }} - <a ui-sref="edit-bill({ id: bill.name })"><i class="uk-icon-edit"></i></a></li>
+</ul>
