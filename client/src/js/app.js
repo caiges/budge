@@ -1,4 +1,4 @@
-var app = angular.module('budgeApp', ['ui.router', 'budgeOverviewController']);
+var app = angular.module('budgeApp', ['ui.router', 'BudgeOverviewController', 'BudgeBillsControllers']);
 
 app.config(['$stateProvider', function($stateProvider) {
 
@@ -7,6 +7,12 @@ app.config(['$stateProvider', function($stateProvider) {
       url: '/',
       authenticate: true,
       controller: 'budgeOverviewCtrl'
+    })
+    .state('bills', {
+      url: 'bills',
+      authenticate: true,
+      controller: 'billsCtrl',
+      templateUrl: '/templates/bills/index.html'
     })
     .state('signin', {
       url: '/signin',
