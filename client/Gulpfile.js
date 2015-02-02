@@ -57,6 +57,7 @@ gulp.task('js', ['config', 'templates'], function() {
       'bower_components/uikit/js/uikit.js',
       'src/js/templates.js',
       'src/js/config.js',
+      'src/js/services/**/*.js',
       'src/js/controllers/**/*.js',
       'src/js/app.js'
     ])
