@@ -24,6 +24,9 @@ func main() {
 	people.HandleFunc("/create", NewPersonHandler)
 	people.HandleFunc("/show", ShowPersonHandler)
 
+	bills := r.PathPrefix("/bills").Subrouter()
+	bills.HandleFunc("/", BillsHandler)
+
 	http.Handle("/", r)
 	log.Println("Listening...")
 	err = http.ListenAndServe(":3000", nil)

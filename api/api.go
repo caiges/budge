@@ -1,11 +1,31 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"gopkg.in/mgo.v2/bson"
 	"log"
 	"net/http"
 )
+
+func BillsHandler(w http.ResponseWriter, r *http.Request) {
+	s := session.Copy()
+	defer s.Close()
+	c := s.DB("test").C("bills")
+	var results []Bill
+	err := c.Find(nil).All(&results)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	json, err := json.Marshal(results)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(json)
+}
 
 func PeopleHandler(w http.ResponseWriter, r *http.Request) {
 	s := session.Copy()
