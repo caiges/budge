@@ -60,11 +60,7 @@ func NewBillHandler(w http.ResponseWriter, r *http.Request) {
 	c := s.DB("test").C("bills")
 
 	err := r.ParseForm()
-	if err != nil {
-		log.Fatal(err)
-		RespondWithError(err.Error(), w)
-		return
-	}
+	FailOnError(err, w)
 
 	bill := Bill{Id: bson.NewObjectId()}
 	decoder := schema.NewDecoder()
