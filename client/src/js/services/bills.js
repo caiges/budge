@@ -24,6 +24,13 @@ billServices.service('billService', ['budgeAPI', function(budgeAPI) {
     existingBill = _.extend(existingBill, bill);
   };
 
+  // Create new bill
+  this.create = function(bill) {
+    this.api.post($.param(bill)).then(function(response) {
+      console.log(response);
+    });
+  };
+
   // Get existing bill from the collection
   this.get = function(id) {
     return _.findWhere(this.bills.collection, { name: id });

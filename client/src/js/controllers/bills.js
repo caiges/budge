@@ -14,7 +14,7 @@ billsControllers.controller('newBillCtrl', ['$scope', '$state', 'billService', f
   $scope.bill = {};
   $scope.save = function(form) {
     if(form.$valid) {
-      billService.save($scope.bill);
+      billService.create($scope.bill);
       $state.go('bills');
     }
   };

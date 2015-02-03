@@ -29,9 +29,11 @@ func main() {
 	people.HandleFunc("/create", NewPersonHandler)
 	people.HandleFunc("/show", ShowPersonHandler)
 
-	r.HandleFunc("/bills", BillsHandler)
+	r.HandleFunc("/bills", BillsHandler).Methods("GET")
+	r.HandleFunc("/bills", NewBillHandler).Methods("POST")
 	bills := r.PathPrefix("/bills").Subrouter()
-	bills.HandleFunc("/", BillsHandler)
+	bills.HandleFunc("/", BillsHandler).Methods("GET")
+	bills.HandleFunc("/", NewBillHandler).Methods("POST")
 
 	chain := alice.New(c.Handler).Then(r)
 
