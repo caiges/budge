@@ -26,13 +26,21 @@ billServices.service('billService', ['budgeAPI', function(budgeAPI) {
 
   // Create new bill
   this.create = function(bill) {
-    this.api.post($.param(bill)).then(function(response) {
-      console.log(response);
-    });
+    this.api.post($.param(bill)).then($.proxy(function(response) {
+      this.bills.collection.push(response);
+      this.sortBills();
+    }, this));
   };
 
   // Get existing bill from the collection
   this.get = function(id) {
     return _.findWhere(this.bills.collection, { name: id });
+  };
+
+  // Sort bills by name
+  this.sortBills = function() {
+    this.bills.collection = _.sortBy(this.bills.collection, function(bill) {
+      return bill.name;
+    });
   };
 }]);
